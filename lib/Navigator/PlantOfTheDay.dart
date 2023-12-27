@@ -22,6 +22,11 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
 
   @override
   Widget build(BuildContext context) {
+
+    var devicePixel = MediaQuery.of(context).devicePixelRatio;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
     // print(snapshot['plant Name']);
     return Scaffold(
       appBar: AppBar(
@@ -36,6 +41,7 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
             color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: "Poppins",
+            fontSize: devicePixel*6.6
           ),
         ),
         centerTitle: true,
@@ -58,7 +64,7 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
 
           SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.only(left: 30,),
+              margin: EdgeInsets.only(left: screenWidth*.076,),
               child: StreamBuilder(
                 stream: firestore.doc("Plants").collection(widget.plantName).snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
@@ -89,10 +95,10 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 40,),
+                        SizedBox(height: screenHeight*.07,),
                         Container(
-                            width: 280,
-                            child: Text(toSentenceCase(widget.plantName), style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins", fontSize: 30, height: 1.2),)
+                            width: screenWidth*.84,
+                            child: Text(toSentenceCase(widget.plantName), style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins", fontSize: devicePixel*11, height: 1.2),)
                         ),
                         // SizedBox(height: 10,),
                         Row(
@@ -101,23 +107,23 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 80,),
-                                Container(height: 85, width: 90, decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [Icon(CupertinoIcons.drop_fill, color: Color(0xff205149)),SizedBox(height: 5,), Text(humidity, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xff205149)),)],) ,),
-                                SizedBox(height: 30,),
-                                Container(height: 85, width: 90, decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [Icon(CupertinoIcons.thermometer, color: Color(0xff205149), size: 30,),SizedBox(height: 5,), Text(temp, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xff205149)),)],) ,),
+                                SizedBox(height: screenHeight*.1,),
+                                Container(height: screenHeight*.1, width: screenWidth*.23, decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [Icon(CupertinoIcons.drop_fill, color: Color(0xff205149), size: devicePixel*8,),SizedBox(height: screenHeight*.005,), Text(humidity, style: TextStyle(fontSize: devicePixel*4.3, fontWeight: FontWeight.w600, color: Color(0xff205149)),)],) ,),
+                                SizedBox(height: screenHeight*.04,),
+                                Container(height: screenHeight*.1, width: screenWidth*.23, decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [Icon(CupertinoIcons.thermometer, color: Color(0xff205149), size: devicePixel*9,),SizedBox(height: screenHeight*.005,), Text(temp, style: TextStyle(fontSize: devicePixel*4.3, fontWeight: FontWeight.w600, color: Color(0xff205149)),)],) ,),
 
-                                SizedBox(height: 50,),
-                                Text("Family", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                                SizedBox(height: screenHeight*.08,),
+                                Text("Family", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                                 Container(
-                                  width: 88,
-                                    child: Text(family, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),)),
+                                  width: screenWidth*.23,
+                                    child: Text(family, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),)),
                               ],
                             ),
 
-                            SizedBox(width: 50,),
+                            SizedBox(width: screenWidth*.128,),
                             Container(
-                                height: 390,
-                                width: 220,
+                                height: screenHeight*.46,
+                                width: screenWidth*.565,
                                 child: Image.asset("assets/images/plant_png.png",fit: BoxFit.cover, alignment: Alignment.topLeft,)),
                           ],
                         ),
@@ -127,76 +133,76 @@ class _PlantOfTheDayState extends State<PlantOfTheDay> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 40,),
-                                Text("Scientific Name", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                                SizedBox(height: screenHeight*.053,),
+                                Text("Scientific Name", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                                 Container(
-                                  width: 160,
-                                    child: Text(sciName, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),)),
+                                  width: screenWidth*.42,
+                                    child: Text(sciName, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),)),
 
                               ],
                             ),
-                            SizedBox(width: 50,),
+                            SizedBox(width: screenWidth*.1,),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 40,),
-                                Text("Other Name", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                                SizedBox(height: screenHeight*.053,),
+                                Text("Other Name", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                                 Container(
-                                  width: 140,
-                                    child: Text(otherName, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),)),
+                                  width: screenWidth*.34,
+                                    child: Text(otherName, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),)),
 
                               ],
                             ),
                           ],
                         ),
 
-                        SizedBox(height: 50,),
+                        SizedBox(height: screenHeight*.053,),
                         Text("About", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 25),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(about, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076,),
+                          child: Text(about, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
 
 
-                        SizedBox(height: 50,),
-                        Text("Properties", textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                        SizedBox(height: screenHeight*.053,),
+                        Text("Properties", textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(prop, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076),
+                          child: Text(prop, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
 
 
-                        SizedBox(height: 50,),
-                        Text("Safety & Precautions", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                        SizedBox(height: screenHeight*.053,),
+                        Text("Safety & Precautions", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(safety, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076),
+                          child: Text(safety, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
 
 
-                        SizedBox(height: 50,),
-                        Text("Preparation & Dosage", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                        SizedBox(height: screenHeight*.053,),
+                        Text("Preparation & Dosage", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(prep, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076),
+                          child: Text(prep, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
 
 
-                        SizedBox(height: 50,),
-                        Text("Habitat & Availability", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                        SizedBox(height: screenHeight*.053,),
+                        Text("Habitat & Availability", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(habitat, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076),
+                          child: Text(habitat, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
 
 
-                        SizedBox(height: 50,),
-                        Text("References", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: 20),),
+                        SizedBox(height: screenHeight*.053,),
+                        Text("References", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins",fontSize: devicePixel*7),),
                         Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text(references, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: 14, color: Color(0xff818181)),),
+                          padding: EdgeInsets.only(right: screenWidth*.076),
+                          child: Text(references, textAlign: TextAlign.justify, style: TextStyle(fontWeight: FontWeight.normal, fontFamily: "Poppins",fontSize: devicePixel*4.8, color: Color(0xff818181)),),
                         ),
-                        SizedBox(height: 50,),
+                        SizedBox(height: screenHeight*.053,),
                       ],
                     );
                   }

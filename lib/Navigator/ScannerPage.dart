@@ -107,10 +107,18 @@ class _ScannerPageState extends State<ScannerPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var devicePixel = MediaQuery.of(context).devicePixelRatio;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
+
     return Scaffold(
       body : Stack(
         children: [
           (imgFile != null) ? Container(
+            height: screenHeight,
+            width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: FileImage(imgFile!),
@@ -122,21 +130,23 @@ class _ScannerPageState extends State<ScannerPage> {
 
           Column(
             children: [
-              SizedBox(height: 80,),
-              Row(
-                children: [
-                  SizedBox(width: 30,),
-                  SvgPicture.asset('assets/icons/flash.svg', height: 20, color: Colors.white,),
-                  SizedBox(width: 80,),
-                  Text("Plant o Pedia", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: "Poppins")),
-                  SizedBox(width: 80,),
-                  Icon(Icons.more_vert, color: Colors.white, size: 35,),
-                ],
+              SizedBox(height: screenHeight*.08,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // SizedBox(width: screenWidth*.08,),
+                    SvgPicture.asset('assets/icons/flash.svg', height: devicePixel*7, color: Colors.white,),
+                    // SizedBox(width: screenWidth*.216,),
+                    Text("   Plant o Pedia", style: TextStyle(color: Colors.white, fontSize: devicePixel*6.8, fontWeight: FontWeight.bold, fontFamily: "Poppins")),
+                    // SizedBox(width: screenWidth*.19,),
+                    Icon(Icons.more_vert, color: Colors.white, size: devicePixel*11,),
+                  ],
+                ),
               ),
 
-              SizedBox(height: 20,),
-
-              SizedBox(height: 520,),
+              SizedBox(height: screenHeight*.67,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -145,11 +155,11 @@ class _ScannerPageState extends State<ScannerPage> {
                       getImage(source: ImageSource.gallery);
                     },
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: screenHeight*.06,
+                      width: screenWidth*.13,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(14),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(.5),
@@ -159,17 +169,17 @@ class _ScannerPageState extends State<ScannerPage> {
                           ),
                         ],
                       ),
-                      child: SvgPicture.asset('assets/icons/img.svg', height: 20,width: 20, color: Colors.black,)
+                      child: Transform.scale(child: SvgPicture.asset('assets/icons/img.svg', color: Colors.black,), scale: screenHeight*.001,),
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(width: screenWidth*.03,),
                   InkWell(
                     onTap: (){
                       Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: PlantOfTheDay(plantName: prediction.toLowerCase(),)));
                     },
                     child: Container(
-                      height: 60,
-                      width: 200,
+                      height: screenHeight*.07,
+                      width: screenWidth*.54,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(18),
@@ -185,24 +195,24 @@ class _ScannerPageState extends State<ScannerPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(prediction.toUpperCase(), style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: "Poppins",),),
-                          SizedBox(width: 10,),
-                          Icon(CupertinoIcons.arrow_up_circle_fill, color: Colors.black,),
+                          Text(prediction.toUpperCase(), style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: "Poppins", fontSize: devicePixel*5),),
+                          SizedBox(width: screenWidth*.03,),
+                          Icon(CupertinoIcons.arrow_up_circle_fill, color: Colors.black, size: devicePixel*7,),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(width: screenWidth*.03,),
                   InkWell(
                     onTap: (){
                       getImage(source: ImageSource.camera);
                     },
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: screenHeight*.06,
+                      width: screenWidth*.13,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(14),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(.5),
@@ -212,7 +222,7 @@ class _ScannerPageState extends State<ScannerPage> {
                           ),
                         ],
                       ),
-                      child: SvgPicture.asset('assets/icons/camera.svg', height: 20, color: Colors.black,),
+                      child: Transform.scale(child: SvgPicture.asset('assets/icons/camera.svg', color: Colors.black,), scale: screenHeight*.001,),
                     ),
                   ),
                 ],

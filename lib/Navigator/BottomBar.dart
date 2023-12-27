@@ -30,20 +30,25 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+
     return Scaffold(
       body: listPages[_selectedIndex],
       bottomNavigationBar: Container(
         child: CurvedNavigationBar(
             key: key,
-            backgroundColor: Color(0xFFececec),
+            backgroundColor: Colors.transparent,
             color: Color(0xff205149),
             index: _selectedIndex,
-            height: 75,
+            height: screenHeight*.08,
             items: [
-              SvgPicture.asset('assets/icons/plantpedia.svg', height: 40, color: Colors.white,),
-              SvgPicture.asset('assets/icons/scanner.svg', height: 40, color: Colors.white,),
+              SvgPicture.asset('assets/icons/plantpedia.svg', height: screenHeight*.045, color: Colors.white,),
+              SvgPicture.asset('assets/icons/scanner.svg', height: screenHeight*.045, color: Colors.white,),
               FaIcon(FontAwesomeIcons.leaf,
-                size: 40,
+                size: screenHeight*.045,
                 color: Colors.white, ),
             ],
             onTap: (pageIndex) {

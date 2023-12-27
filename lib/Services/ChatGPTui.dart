@@ -39,6 +39,11 @@ class _ChatGPTuiState extends State<ChatGPTui> {
 
   @override
   Widget build(BuildContext context) {
+
+    var devicePixel = MediaQuery.of(context).devicePixelRatio;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFececec),
@@ -52,7 +57,7 @@ class _ChatGPTuiState extends State<ChatGPTui> {
             color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: "Poppins",
-            fontSize: 18,
+            fontSize: devicePixel*6,
           ),
         ),
         centerTitle: true,
@@ -63,28 +68,27 @@ class _ChatGPTuiState extends State<ChatGPTui> {
 
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth*.076),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40,),
+                  SizedBox(height: screenHeight*.053,),
                   Container(
-                      width: 280,
-                      child: Text("Plant GPT", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins", fontSize: 30, height: 1.2),)
+                      child: Text("Plant GPT", style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins", fontSize: devicePixel*10, height: 1.2),)
                   ),
-                  SizedBox(height: 40,),
+                  SizedBox(height: screenHeight*.06,),
                   response=="" ? Container(
-                    height: 460,
-                    child: Lottie.asset("assets/lottie/plant.json",height: 400, width: 400 ,repeat: true),) : Container(height: 460, child: Text(response),),
+                    height: screenHeight*.53,
+                    child: Lottie.asset("assets/lottie/plant.json",height: screenHeight*.53, width: screenWidth*.9, repeat: true),) : Container(height: screenHeight*.53, child: Text(response),),
                   Column(
                     children: [
-                      SizedBox(height: 40,),
+                      SizedBox(height: screenHeight*.06,),
                       Container(
 
                         child: Row(
                           children: [
                             Container(
-                              width: 280,
+                              width: screenWidth*.71,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14),
                                 color: Color(0xffFFFFFF),
@@ -99,7 +103,7 @@ class _ChatGPTuiState extends State<ChatGPTui> {
                               ),
                               child: Row(
                                 children: [
-                                  SizedBox(width: 10,),
+                                  SizedBox(width: screenWidth*.04,),
                                   Expanded(
                                     child: TextField(
                                       controller: messageController,
@@ -117,15 +121,15 @@ class _ChatGPTuiState extends State<ChatGPTui> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(width: screenWidth*.027,),
                             InkWell(
                               onTap: (){
                                 sendMessage();
                               },
                               child: Container(
-                                height: 40,
-                                width: 40,
-                                child: SvgPicture.asset('assets/icons/send.svg', height: 50, color: Colors.black,),
+                                height: screenHeight*.07,
+                                width: screenWidth*.103,
+                                child: SvgPicture.asset('assets/icons/send.svg', color: Colors.black,),
                               ),
                             ),
                           ],
